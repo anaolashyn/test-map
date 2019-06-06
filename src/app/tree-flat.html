@@ -1,0 +1,29 @@
+<div class='main-block'>
+  <div class="lists-block">
+    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+      <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+        <button mat-icon-button disabled class='button'></button>
+        <span (click)="add(node)">• {{node.name}}</span>
+      </mat-tree-node>
+      <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+        <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name" class='button'>
+          <mat-icon class="mat-icon-rtl-mirror">
+            {{treeControl.isExpanded(node) ? 'remove' : 'add'}}
+          </mat-icon>
+        </button>
+        <span (click)="add(node)">{{node.name}}</span>
+      </mat-tree-node>
+    </mat-tree>
+    <div class="line"></div>
+    <mat-tree [dataSource]="dataSourceActive" [treeControl]="treeControl">
+      <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+        <button mat-icon-button disabled class='button'></button>
+        <span (click)="delete(node)">• {{node.name}}</span>
+      </mat-tree-node>
+
+    </mat-tree>
+  </div>
+
+  <div style="height: 100vh; width: 70%" leaflet (leafletMapReady)="onMapReady($event)" [leafletOptions]="options">
+  </div>
+</div>
